@@ -4,10 +4,13 @@ import com.charles.algorithm.book_utils.In;
 import com.charles.algorithm.book_utils.StdIn;
 import com.charles.algorithm.book_utils.StdOut;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class BinarySearch {
 
+    List<String> list = new ArrayList<String>();
 
 
     public static int rank(int key, int[] a){
