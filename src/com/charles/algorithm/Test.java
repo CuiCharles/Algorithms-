@@ -9,7 +9,6 @@ public class Test extends Object{
     public static void modify(String s){
         s += "dd";
         System.out.println(s);
-        ArrayList
     }
 
 
