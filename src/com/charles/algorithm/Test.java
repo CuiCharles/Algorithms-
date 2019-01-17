@@ -2,11 +2,14 @@ package com.charles.algorithm;
 
 import com.charles.algorithm.book_utils.StdOut;
 
+import java.util.ArrayList;
+
 public class Test extends Object{
 
     public static void modify(String s){
         s += "dd";
         System.out.println(s);
+        ArrayList
     }
 
 
