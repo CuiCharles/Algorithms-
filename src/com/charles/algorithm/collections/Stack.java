@@ -6,6 +6,8 @@ import java.util.function.Consumer;
 
 /**
  * LIFO
+ *
+ * Use Linked-List
  * @param <Item>
  */
 public class Stack<Item> /*implements Iterable<Item> */{
