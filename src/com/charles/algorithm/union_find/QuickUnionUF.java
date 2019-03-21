@@ -3,26 +3,22 @@ package com.charles.algorithm.union_find;
 import com.charles.algorithm.book_utils.StdIn;
 import com.charles.algorithm.book_utils.StdOut;
 
-public class QuickFindUF {
+public class QuickUnionUF {
 
-    private int[] id;
+    private int[] parent;
     private int count;
 
 
-    public QuickFindUF(int n) {
+    public QuickUnionUF(int n) {
         this.count = n;
-        id = new int[n];
+        parent = new int[n];
         for (int i = 0; i < n; i++) {
-            id[i] = i;
+            parent[i] = i;
         }
     }
 
 
-    /**
-     * 返回一共有多少组connected componet
-     *
-     * @return
-     */
+
     public int count() {
         return count;
     }
@@ -30,12 +26,18 @@ public class QuickFindUF {
 
     public int find(int p) {
         validate(p);
-        return id[p];
+
+        int i = p;
+        while(parent[i] != i){
+            i = parent[i];
+        }
+
+        return i;
     }
 
 
     private void validate(int p) {
-        int n = id.length;
+        int n = parent.length;
         if (p < 0 || p >= n) {
             throw new IllegalArgumentException("index " + p + " is not between 0 and " + (n - 1));
         }
@@ -51,14 +53,12 @@ public class QuickFindUF {
         validate(p);
         validate(q);
 
-        int pID = id[p];
-        int qID = id[q];
+        int rootP = find(p);
+        int rootQ = find(q);
 
-        if(pID == qID)  return ;
+        if(rootP == rootQ)  return ;
 
-        for(int i = 0; i < id.length; i++){
-            if(id[i] == pID)  id[i] = qID;
-        }
+        parent[rootP] = rootQ;
 
         count -- ;
     }
@@ -67,7 +67,7 @@ public class QuickFindUF {
 
     public static void main(String[] args){
         int n = StdIn.readInt();
-        QuickFindUF uf = new QuickFindUF(n);
+        QuickUnionUF uf = new QuickUnionUF(n);
         while (!StdIn.isEmpty()) {
             int p = StdIn.readInt();
             int q = StdIn.readInt();
@@ -77,8 +77,5 @@ public class QuickFindUF {
         }
         StdOut.println(uf.count() + " components");
     }
-
-
-
 
 }
