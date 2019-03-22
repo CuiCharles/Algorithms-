@@ -66,6 +66,9 @@ public class QuickFindUF {
 
 
     public static void main(String[] args){
+
+        long startTime = System.currentTimeMillis();
+
         int n = StdIn.readInt();
         QuickFindUF uf = new QuickFindUF(n);
         while (!StdIn.isEmpty()) {
@@ -76,6 +79,10 @@ public class QuickFindUF {
             StdOut.println(p + " " + q);
         }
         StdOut.println(uf.count() + " components");
+
+        long endTime = System.currentTimeMillis();
+
+        StdOut.println("QuickFindUF time costs:" + (endTime - startTime));
     }
 
 

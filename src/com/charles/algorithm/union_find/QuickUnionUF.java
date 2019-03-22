@@ -66,6 +66,7 @@ public class QuickUnionUF {
 
 
     public static void main(String[] args){
+        long startTime = System.currentTimeMillis();
         int n = StdIn.readInt();
         QuickUnionUF uf = new QuickUnionUF(n);
         while (!StdIn.isEmpty()) {
@@ -76,6 +77,8 @@ public class QuickUnionUF {
             StdOut.println(p + " " + q);
         }
         StdOut.println(uf.count() + " components");
+        long endTime = System.currentTimeMillis();
+        StdOut.println("QuickUnionUF time costs:" + (endTime - startTime));
     }
 
 }
