@@ -3,17 +3,22 @@ package com.charles.algorithm.union_find;
 import com.charles.algorithm.book_utils.StdIn;
 import com.charles.algorithm.book_utils.StdOut;
 
-public class QuickUnionUF {
+public class WeightedQuickUnionWtithPathCompressionUF {
 
     private int[] parent;
+    //维护每个组别中结点的数量
+    private int [] sizes;
+    //多少个组
     private int count;
 
 
-    public QuickUnionUF(int n) {
+    public WeightedQuickUnionWtithPathCompressionUF(int n) {
         this.count = n;
         parent = new int[n];
+        sizes = new int[n];
         for (int i = 0; i < n; i++) {
             parent[i] = i;
+            sizes[i] = 1;
         }
     }
 
@@ -27,12 +32,14 @@ public class QuickUnionUF {
     public int find(int p) {
         validate(p);
 
-        int i = p;
-        while(parent[i] != i){
-            i = parent[i];
+
+        while(parent[p] != p){
+            //path compression
+            parent[p] = parent[parent[p]];
+            p = parent[p];
         }
 
-        return i;
+        return p;
     }
 
 
@@ -50,23 +57,33 @@ public class QuickUnionUF {
     }
 
     public void union(int p , int q){
-
         int rootP = find(p);
         int rootQ = find(q);
 
         if(rootP == rootQ)  return ;
 
-        parent[rootP] = rootQ;
-
+        if(sizes[rootP] > sizes[rootQ]){
+            //让Q称为P的子树
+            parent[rootQ] = rootP;
+            //改变每组结点的数量
+            sizes[rootP] += sizes[rootQ];
+        }else{
+            //让P称为Q的子树
+            parent[rootP] = rootQ;
+            //改变每组结点的数量
+            sizes[rootQ] += sizes[rootP];
+        }
         count -- ;
     }
 
 
 
     public static void main(String[] args){
+
         long startTime = System.currentTimeMillis();
+
         int n = StdIn.readInt();
-        QuickUnionUF uf = new QuickUnionUF(n);
+        WeightedQuickUnionWtithPathCompressionUF uf = new WeightedQuickUnionWtithPathCompressionUF(n);
         while (!StdIn.isEmpty()) {
             int p = StdIn.readInt();
             int q = StdIn.readInt();
@@ -75,8 +92,10 @@ public class QuickUnionUF {
             StdOut.println(p + " " + q);
         }
         StdOut.println(uf.count() + " components");
+
         long endTime = System.currentTimeMillis();
-        StdOut.println("QuickUnionUF time costs:" + (endTime - startTime));
+
+        StdOut.println("WeightedQuickUnionUF time costs:" + (endTime - startTime));
     }
 
 }

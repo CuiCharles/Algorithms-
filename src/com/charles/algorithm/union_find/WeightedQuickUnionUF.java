@@ -8,6 +8,7 @@ public class WeightedQuickUnionUF {
     private int[] parent;
     //维护每个组别中结点的数量
     private int [] sizes;
+    //多少个组
     private int count;
 
 
@@ -17,9 +18,6 @@ public class WeightedQuickUnionUF {
         sizes = new int[n];
         for (int i = 0; i < n; i++) {
             parent[i] = i;
-        }
-
-        for (int i = 0; i < n; i++) {
             sizes[i] = 1;
         }
     }
@@ -33,13 +31,11 @@ public class WeightedQuickUnionUF {
 
     public int find(int p) {
         validate(p);
-
-        int i = p;
-        while(parent[i] != i){
-            i = parent[i];
+        while(parent[p] != p){
+            p = parent[p];
         }
 
-        return i;
+        return p;
     }
 
 
@@ -57,9 +53,6 @@ public class WeightedQuickUnionUF {
     }
 
     public void union(int p , int q){
-        validate(p);
-        validate(q);
-
         int rootP = find(p);
         int rootQ = find(q);
 
@@ -76,7 +69,6 @@ public class WeightedQuickUnionUF {
             //改变每组结点的数量
             sizes[rootQ] += sizes[rootP];
         }
-
         count -- ;
     }
 
