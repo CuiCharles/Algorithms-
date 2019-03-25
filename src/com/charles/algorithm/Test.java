@@ -21,5 +21,7 @@ public class Test extends Object{
         s[1] = 's';
         System.out.println(a);
 
+        //fsadfjasdfkljasdfk
+
     }
 }
