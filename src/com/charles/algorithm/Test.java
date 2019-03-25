@@ -21,19 +21,8 @@ public class Test extends Object{
         s[1] = 's';
         System.out.println(a);
 
-        //////fsadfjsdakfja k
-        //////fsadfjsdakfja k//////fsadfjsdakfja k
-        //////fsadfjsdakfja k
-        //////fsadfjsdakfja k
-        //////fsadfjsdakfja k
-        //////fsadfjsdakfja k
-        //////fsadfjsdakfja k//////fsadfjsdakfja k
 
-
-
-
-
-        //1231248623875643
+        //nihao
 
     }
 }
